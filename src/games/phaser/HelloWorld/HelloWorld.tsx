@@ -1,50 +1,61 @@
 import Phaser from "phaser";
-class Example extends Phaser.Scene
-{
-		preload ()
-		{
-				this.load.setBaseURL('https://labs.phaser.io');
+import { useEffect } from "react";
 
-				this.load.image('sky', 'assets/skies/space3.png');
-				this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-				this.load.image('red', 'assets/particles/red.png');
-		}
+class Example extends Phaser.Scene {
+	preload() {
+		this.load.setBaseURL('https://labs.phaser.io');
 
-		create ()
-		{
-				this.add.image(400, 300, 'sky');
+		this.load.image('sky', 'assets/skies/space3.png');
+		this.load.image('logo', 'assets/sprites/phaser3-logo.png');
+		this.load.image('red', 'assets/particles/red.png');
+	}
 
-				const particles = this.add.particles(0, 0, 'red', {
-						speed: 100,
-						scale: { start: 1, end: 0 },
-						blendMode: 'ADD'
-				});
+	create() {
+		this.add.image(400, 300, 'sky');
 
-				const logo = this.physics.add.image(400, 100, 'logo');
+		const particles = this.add.particles(0, 0, 'red', {
+			speed: 100,
+			scale: { start: 1, end: 0 },
+			blendMode: 'ADD'
+		});
 
-				logo.setVelocity(100, 200);
-				logo.setBounce(1, 1);
-				logo.setCollideWorldBounds(true);
+		const logo = this.physics.add.image(400, 100, 'logo');
 
-				particles.startFollow(logo);
-		}
+		logo.setVelocity(100, 200);
+		logo.setBounce(1, 1);
+		logo.setCollideWorldBounds(true);
+
+		particles.startFollow(logo);
+	}
 }
+const HelloWorld = () => {
+  useEffect(() => {
+    const initializeGame = () => {
+      const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: Example,
+        physics: {
+          default: 'arcade',
+          arcade: {
+            gravity: { y: 200 }
+          }
+        },
+				parent: "hello-world-container"
+      };
+      const game = new Phaser.Game(config);
+    };
 
-const config = {
-		type: Phaser.AUTO,
-		width: 800,
-		height: 600,
-		scene: Example,
-		physics: {
-				default: 'arcade',
-				arcade: {
-						gravity: { y: 200 }
-				}
-		}
+    // 使用setTimeout在组件挂载后等待一小段时间再创建游戏
+    const timeoutId = setTimeout(initializeGame, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return <div id="hello-world-container"></div>;
 };
 
-export default function HelloWorld(){
-	return (
-		<>{new Phaser.Game(config)}</>
-	)
-}
+export default HelloWorld;
