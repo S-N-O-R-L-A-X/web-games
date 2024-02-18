@@ -10,15 +10,5 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle" crossorigin="anonymous"></script>
-    <script>
-      window.RufflePlayer = window.RufflePlayer || {};
-      window.addEventListener("load", (event) => {
-          const ruffle = window.RufflePlayer.newest();
-          const player = ruffle.createPlayer();
-          const container = document.getElementById("root");
-          container.appendChild(player);
-          player.load("./src/assets/zombie.swf");
-      });
-  </script>
   </body>
 </html>
