@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { useEffect } from "react";
+import PhaserLoader from "../PhaserLoader";
 
 class Example extends Phaser.Scene {
 	preload() {
@@ -29,33 +30,20 @@ class Example extends Phaser.Scene {
 	}
 }
 const HelloWorld = () => {
-  useEffect(() => {
-    const initializeGame = () => {
-      const config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        scene: Example,
-        physics: {
-          default: 'arcade',
-          arcade: {
-            gravity: { y: 200 }
-          }
-        },
-				parent: "hello-world-container"
-      };
-      const game = new Phaser.Game(config);
-    };
-
-    // 使用setTimeout在组件挂载后等待一小段时间再创建游戏
-    const timeoutId = setTimeout(initializeGame, 100);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  return <div id="hello-world-container"></div>;
+  const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    scene: Example,
+    physics: {
+      default: 'arcade',
+      arcade: {
+        gravity: { y: 200 }
+      }
+    },
+    parent: "hello-world-container"
+  };
+  return <PhaserLoader config={config}/>
 };
 
 export default HelloWorld;
