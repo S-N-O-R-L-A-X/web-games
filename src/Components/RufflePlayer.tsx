@@ -7,17 +7,15 @@ interface RufflePlayerProps {
 export default function RufflePlayer(props: RufflePlayerProps) {
 	const { address } = props;
 	const ref = useRef<HTMLDivElement>(null);
-	useEffect(()=>{
+	useEffect(() => {
 		// @ts-ignore
 		const ruffle = window.RufflePlayer.newest();
 		const player = ruffle.createPlayer();
-		player.load(address);
 		ref.current!.appendChild(player);
-	},[])
+		player.load(address);
+	}, [])
 
 	return (
-		<div ref={ref} >
-			
-		</div>
+		<div ref={ref} />
 	)
 }

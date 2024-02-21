@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       {/* <Hello></Hello> */}
-      <RufflePlayer address='./assets/zombie3.swf'/>
+      {/* <RufflePlayer address='./assets/zombie3.swf'/> */}
     </>
   )
 }
