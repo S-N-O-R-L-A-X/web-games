@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import { useEffect } from "react";
 import PhaserLoader from "../PhaserLoader";
 
 class Example extends Phaser.Scene {
